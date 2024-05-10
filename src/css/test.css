@@ -1,0 +1,32 @@
+.App {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  /* Style cho khung chọn ảnh */
+  .ReactCrop__image {
+    max-width: 100%;
+    max-height: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Style cho khung crop */
+  .ReactCrop__crop-selection {
+    border: 1px dashed rgba(255, 255, 255, 0.75);
+  }
+  
+  /* Style cho nút ghép ảnh */
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

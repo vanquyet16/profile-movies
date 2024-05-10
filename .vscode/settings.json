@@ -1,0 +1,8 @@
+{
+  "editor.fontSize": 18,
+  "editor.fontFamily": "jetBrains Mono,Menlo, Monaco, 'Courier New', monospace",
+  "liveServer.settings.multiRootWorkspaceName": "demominiapp",
+  "window.zoomLevel": -1,
+  "terminal.integrated.mouseWheelZoom": false,
+  "editor.mouseWheelZoom": true
+}

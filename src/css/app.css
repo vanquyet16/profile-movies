@@ -1,0 +1,50 @@
+.page {
+  padding: 16px 16px 96px 16px;
+}
+
+.section-container {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.zaui-list-item {
+  cursor: pointer;
+}
+
+.zaui-bottom-navigation-content {
+  height: 70px;
+  background-color: black;
+  padding: 5px;
+}
+
+.zaui-bottom-navigation-item{
+  color: white;
+}
+
+.zaui-bottom-navigation-item-active {
+  color: #000000;
+  background-color: #a6adb1;
+  border-radius: 50px;
+}
+/* 
+iframe {
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  width: 100%;
+  height: 230px;
+}
+
+.ytp-button {
+  width: 48px;
+  height: 48px;
+  display: block;
+} */
+
+.styleFrame {
+  width: 100%;
+  height: 230px;
+}

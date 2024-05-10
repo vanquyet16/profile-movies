@@ -1,0 +1,40 @@
+#app { height: 100% }
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+.swiper {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 40px;
+  height: 350px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 200px;
+  height:400px;
+}
+
+.swiper-new {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 40px;
+  height: 250px;
+}
+
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.swiperSlide-new {
+  background-position: center;
+  background-size: cover;
+  width: 150px;
+  height:100px;
+  padding: 5px;
+}

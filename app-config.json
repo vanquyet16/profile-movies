@@ -1,0 +1,34 @@
+{
+  "app": {
+    "title": "FlimProFile",
+    "headerTitle": "FlimProFile",
+    "headerColor": "#000000",
+    "textColor": "white",
+    "textAlign": "left",
+    "statusBarColor": "#000000",
+    "leftButton": "back",
+    "statusBar": "normal",
+    "actionBarHidden": false,
+    "hideAndroidBottomNavigationBar": true,
+    "hideIOSSafeAreaBottom": true,
+    "selfControlLoading": false
+    
+  },
+  "debug": false,
+  "pages": [
+    "/user",
+    "/form",
+    "/dynamic-route",
+    "/about",
+    "/404"
+  ],
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": [],
+  "template": {
+    "primaryColor": "#006af5",
+    "prefixCurrencySymbol": false,
+    "currencySymbol": "đ",
+    "headerLogo": ""
+  }
+}
