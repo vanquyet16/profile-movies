@@ -71,27 +71,30 @@ const SearchPage: React.FunctionComponent = () => {
   //   }, []);
 
   return (
-    <Page style={{ backgroundColor: appColor.backGround }}>
-      <div className="flex w-[82%] justify-evenly  items-center">
-        <div className="w-[40px] h-[40px]  flex justify-center items-center" onClick={handleBack}>
+    <Page>
+        <div className=" flex flex-row">
+        <div className="w-[30px] h-[40px]  pl-3 flex justify-center items-center" onClick={handleBack}>
           <Icon
             icon="zi-arrow-left"
             size={30}
-            style={{ color: "white" }}
-            
+            style={{ color: "white"}}
+            className="hover:opacity-70"
           ></Icon>
         </div>
+      <div className="flex items-center w-64 pl-3">
         <input
           onChange={(e) => {
             handelChaneText(e.target.value);
           }}
           value={valueInput}
           type="text"
-          className="w-[80%] h-8 rounded-full border border-white pl-2 bg-black text-white"
+          className="w-56 h-8 rounded-full border border-white pl-2 bg-black text-white"
           placeholder="Nhập tên"
           autoFocus={true}
         />
       </div>
+        </div>
+      
       <div>
         {moviesSearch.length === 0 ? (
           <div className=" flex text-white p-4 w-full justify-center">

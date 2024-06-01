@@ -62,7 +62,7 @@ const HomePage: React.FunctionComponent = () => {
   }, []);
 
   const handleClickSearch = () => {
-    navigate('/search') 
+  navigate('/search',{direction: 'forward', animate: true}) 
   }
 
   return (

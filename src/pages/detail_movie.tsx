@@ -93,7 +93,7 @@ const DetailMovie: React.FunctionComponent = () => {
             icon="zi-arrow-left"
             size={30}
             style={{ color: "white" }}
-            
+            className="hover:opacity-70"
           ></Icon>
         </div>
         <YouTube
