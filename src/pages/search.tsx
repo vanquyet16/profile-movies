@@ -1,103 +1,129 @@
 import React, { useEffect, useState } from "react";
-import { Page, Box, useSnackbar, Text, useNavigate, Avatar } from "zmp-ui";
+import {
+  Page,
+  Box,
+  useSnackbar,
+  Text,
+  useNavigate,
+  Avatar,
+  Icon,
+} from "zmp-ui";
 import authenticationAPI from "../apis/authApi";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import SwiperTrenDing from "../components/swiper-trending";
 import SwiperNew from "../components/swiper-new";
 import { Movie } from "../model/movie";
-import { API_KEY } from "../constants/appInfos";
+import { API_KEY, image500 } from "../constants/appInfos";
 import { appColor } from "../utils/app-config";
 import { getUserInfo } from "zmp-sdk/apis";
 import HeaderComponent from "../components/HeaderComponent";
 
-const HomePage: React.FunctionComponent = () => {
+const SearchPage: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const { openSnackbar, closeSnackbar } = useSnackbar();
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [img, setImg] = useState('')
+  const [moviesSearch, setMoviesSearch] = useState([]);
+  console.log("🚀 ~ moviesSearch:", moviesSearch);
+  const [valueInput, setValueInput] = useState("");
 
-  const fetchMovies = async () => {
-    openSnackbar({
-      type: "loading",
-      text: "Loading...",
-    });
+  const handelChaneText = (e: string) => {
+    setValueInput(e);
+    searchMovies(e);
+  };
+
+  const searchMovies = async (nameMovie: string) => {
+    // openSnackbar({
+    //   type: "loading",
+    //   text: "Loading...",
+    // });
     try {
-      const trendingResponse:any = await authenticationAPI.HandleAuthentication(
-        `/trending/movie/week?language=vi&api_key=${API_KEY}`,
+      const response: any = await authenticationAPI.HandleAuthentication(
+        `/search/movie?query=${nameMovie}&include_adult=false&language=vi&page=1&api_key=${API_KEY}`,
         "get"
       );
-      if (trendingResponse && trendingResponse.results) {
-        setTrendingMovies(trendingResponse.results);
+      if (response && response.results) {
+        console.log("🚀 ~ searchMovies ~ response.results:", response.results);
+        setMoviesSearch(response.results);
       } else {
         throw new Error("Trending movies data is empty");
       }
 
-      const upcomingResponse:any = await authenticationAPI.HandleAuthentication(
-        `/movie/upcoming?language=vi&api_key=${API_KEY}`,
-        "get"
-      );
-      if (upcomingResponse && upcomingResponse.results) {
-        setUpcomingMovies(upcomingResponse.results);
-      } else {
-        throw new Error("Upcoming movies data is empty");
-      }
-
-      closeSnackbar();
+      //   closeSnackbar();
     } catch (error) {
       console.log("Error fetching movies:", error);
-      closeSnackbar();
+      //   closeSnackbar();
       openSnackbar({
         type: "error",
         text: `Failed to fetch movies. ${(error as Error).message}`,
       });
     }
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  }
   const handelDetail = (item: Movie) => {
-    navigate(`detail-movie/${item.id}`)
-  }
+    console.log("🚀 ~ handelDetail ~ item:", item)
+    navigate(`/detail-movie/${item.id}`);
+  };
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  const handleClickSearch = () => {
-    navigate('/search') 
-  }
+  //   useEffect(() => {
+  //     searchMovies()
+  //   }, []);
 
   return (
-    <Page >
-      <Box className="with-full" p={0}>
-        <Box className="h-auto">
-        <HeaderComponent onclick={() =>handleClickSearch()}/>
-          <Text className="text-white p-3" size="xLarge" bold={true}>
-            Xu hướng
-          </Text>
-          <SwiperTrenDing data={trendingMovies} onSlideClick={(item:Movie) => {
-            handelDetail(item)
-          }}/>
-        </Box>
-        <Box className="h-auto">
-          <Box flexDirection="row" justifyContent="space-between">
-            <Text className="text-white p-2" size="xLarge" bold={true}>
-              Sắp chiếu
-            </Text>
-            <Text className="text-[#F8EE0D] p-2" size="xLarge" bold={true}>
-              Xem thêm
-            </Text>
-          </Box>
-
-          <SwiperNew data={upcomingMovies} onSlideClick={(item:Movie) => {
-            handelDetail(item)
-          }}/>
-        </Box>
-      </Box>
+    <Page style={{ backgroundColor: appColor.backGround }}>
+      <div className="flex w-[82%] justify-evenly  items-center">
+        <div className="w-[40px] h-[40px]  flex justify-center items-center" onClick={handleBack}>
+          <Icon
+            icon="zi-arrow-left"
+            size={30}
+            style={{ color: "white" }}
+            
+          ></Icon>
+        </div>
+        <input
+          onChange={(e) => {
+            handelChaneText(e.target.value);
+          }}
+          value={valueInput}
+          type="text"
+          className="w-[80%] h-8 rounded-full border border-white pl-2 bg-black text-white"
+          placeholder="Nhập tên"
+          autoFocus={true}
+        />
+      </div>
+      <div>
+        {moviesSearch.length === 0 ? (
+          <div className=" flex text-white p-4 w-full justify-center">
+            Không tìm thấy
+          </div>
+        ) : (
+          moviesSearch.map((item: any) => {
+            return (
+              <div
+                key={item}
+                className="flex items-center p-4 border-b border-[#a2a1a1]"
+                onClick={() => {
+                    handelDetail(item);
+                }}
+              >
+                <Avatar
+                  src={image500(item.poster_path) || ""}
+                  size={50}
+                ></Avatar>
+                <Text className="text-white p-2" size="xLarge" bold={true}>
+                  {item.title}
+                </Text>
+              </div>
+            );
+          })
+        )}
+      </div>
     </Page>
   );
 };
 
-export default HomePage;
-
+export default SearchPage;
 
 // import React, { useEffect, useState } from "react";
 // import { Page, Box, useSnackbar, Text } from "zmp-ui";
@@ -110,9 +136,8 @@ export default HomePage;
 // import { useRecoilValue } from "recoil";
 // import { fetchTrendingMovies, fetchUpcomingMovies } from "../state";
 
-
 // const HomePage: React.FunctionComponent = () => {
-  // const trendingMovies = useRecoilValue(fetchTrendingMovies);
+// const trendingMovies = useRecoilValue(fetchTrendingMovies);
 //   // const upcomingMovies = useRecoilValue(fetchUpcomingMovies);
 
 //   const { openSnackbar, closeSnackbar } = useSnackbar();
@@ -160,7 +185,6 @@ export default HomePage;
 // //     }
 // //   });
 
-
 // // getUserInfo({
 // //   avatarType: "normal",
 // //   success: (data) => {
@@ -197,7 +221,7 @@ export default HomePage;
 //             xem thêm
 //           </Text>
 //           </Box>
-          
+
 //          <SwiperNew data={upcomingMovies} />
 //         </Box>
 //       </Box>

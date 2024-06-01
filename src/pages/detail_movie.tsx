@@ -8,6 +8,7 @@ import {
   Header,
   Text,
   Stack,
+  Icon,
 } from "zmp-ui";
 import { useRecoilState } from "recoil";
 import { displayNameState } from "../state";
@@ -21,6 +22,7 @@ import { Movie } from "../model/movie";
 import "../css/app.css";
 import { Cast } from "../model/cast";
 import SwiperCast from "../components/swiper-cast";
+import TextViewDetailComponent from "../components/TextViewDetailComponent";
 const DetailMovie: React.FunctionComponent = () => {
   const [displayName, setDisplayName] = useRecoilState(displayNameState);
   const snackbar = useSnackbar();
@@ -37,7 +39,7 @@ const DetailMovie: React.FunctionComponent = () => {
     });
     try {
       const detailMovie: any = await authenticationAPI.HandleAuthentication(
-        `/movie/560016?language=vi&api_key=f2cf4dee03036aa9e6fe7b67466e5772`,
+        `/movie/${id}?language=vi&api_key=f2cf4dee03036aa9e6fe7b67466e5772`,
         "get"
       );
       if (detailMovie) {
@@ -76,6 +78,9 @@ const DetailMovie: React.FunctionComponent = () => {
       });
     }
   };
+  const handleBack = () => {
+    navigate(-1);
+  }
   useEffect(() => {
     getDetail();
   }, []);
@@ -83,6 +88,14 @@ const DetailMovie: React.FunctionComponent = () => {
   return (
     <Page className={`bg-[#313230]`}>
       <Box className="w-auto">
+      <div className="w-[40px] h-[40px]  flex justify-center items-center" onClick={handleBack}>
+          <Icon
+            icon="zi-arrow-left"
+            size={30}
+            style={{ color: "white" }}
+            
+          ></Icon>
+        </div>
         <YouTube
           style={{ width: "100%", height: "50%" }}
           iframeClassName="styleFrame"
@@ -96,9 +109,7 @@ const DetailMovie: React.FunctionComponent = () => {
         <h1 className="text-[#F8EE0D] font-bold text-2xl">
           {detail?.original_title}
         </h1>
-        <span className="text-white text-xl flex-grow italic">
-          {detail?.overview}{" "}
-        </span>
+        <TextViewDetailComponent text={detail?.overview} maxLength={200}></TextViewDetailComponent>
         <Box flexDirection="row" alignItems="center" mt={1}>
           <h1 className="text-white text-[15px] font-bold">Ngày phát hành:</h1>
           <span className="text-opacity-50 ml-1 text-white text-[15px]">

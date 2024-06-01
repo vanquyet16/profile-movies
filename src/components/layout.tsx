@@ -9,6 +9,9 @@ import Form from "../pages/form";
 import User from "../pages/user";
 import { ScrollRestoration } from "./scroll-restoration";
 import DetailMovie from "../pages/detail_movie";
+import HeaderComponent from "./HeaderComponent";
+import { appColor } from "../utils/app-config";
+import SearchPage from "../pages/search";
 
 
 if (getSystemInfo().platform === "android") {
@@ -26,7 +29,8 @@ export const Layout: FC = () => {
   // useHandlePayment();
 
   return (
-    <Box flex flexDirection="column" className="h-screen">
+    <Box flex flexDirection="column" className="h-screen"     style={{backgroundColor: appColor.backGround}}
+    >
       <ScrollRestoration />
       <Box className="flex-1 flex flex-col overflow-hidden">
         <Routes>
@@ -35,6 +39,8 @@ export const Layout: FC = () => {
               <Route path="/form" element={<Form></Form>}></Route>
               <Route path="/user" element={<User></User>}></Route>
               <Route path="/detail-movie/:id" element={<DetailMovie></DetailMovie>}></Route>
+              <Route path="/search" element={<SearchPage></SearchPage>}></Route>
+              
           </Routes>
       </Box>
       <ButtomNavigation />

@@ -2,13 +2,13 @@
   "app": {
     "title": "FlimProFile",
     "headerTitle": "FlimProFile",
-    "headerColor": "#000000",
+    "headerColor": "",
     "textColor": "white",
     "textAlign": "left",
-    "statusBarColor": "#000000",
+    "statusBarColor": "#313230",
     "leftButton": "back",
     "statusBar": "normal",
-    "actionBarHidden": false,
+    "actionBarHidden": true,
     "hideAndroidBottomNavigationBar": true,
     "hideIOSSafeAreaBottom": true,
     "selfControlLoading": false

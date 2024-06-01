@@ -30,7 +30,7 @@ const tabs: Record<string,MenuItem> = {
 export type TabKeys = keyof typeof tabs;
 // const { id } = useParams(); // Trích xuất ID phim từ tham số đường dẫn
 
-export const NO_BOTTOM_NAVIGATION_PAGES = [`/detail-movie/\\w+`];
+export const NO_BOTTOM_NAVIGATION_PAGES = [`/detail-movie/\\w+`,'/search'];
 
 export const ButtomNavigation: FC = () => {
     const [activeTab, setActiveTab] = useState<TabKeys>("/");
