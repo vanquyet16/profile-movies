@@ -15,6 +15,7 @@ const HomePage: React.FunctionComponent = () => {
   const { openSnackbar, closeSnackbar } = useSnackbar();
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [topMovies, setTopMovies] = useState([]);
   const [img, setImg] = useState('')
 
   const fetchMovies = async () => {
@@ -42,6 +43,15 @@ const HomePage: React.FunctionComponent = () => {
       } else {
         throw new Error("Upcoming movies data is empty");
       }
+      const topMoviesResponse:any = await authenticationAPI.HandleAuthentication(
+        `/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`,
+        "get"
+      );
+      if (topMoviesResponse && topMoviesResponse.results) {
+        setTopMovies(topMoviesResponse.results);
+      } else {
+        throw new Error("Upcoming movies data is empty");
+      }
 
       closeSnackbar();
     } catch (error) {
@@ -66,14 +76,14 @@ const HomePage: React.FunctionComponent = () => {
   }
 
   return (
-    <Page >
+    <Page className="">
       <Box className="with-full" p={0}>
         <Box className="h-auto">
         <HeaderComponent onclick={() =>handleClickSearch()}/>
           <Text className="text-white p-3" size="xLarge" bold={true}>
-            Xu hướng
+            Phim hot
           </Text>
-          <SwiperTrenDing data={trendingMovies} onSlideClick={(item:Movie) => {
+          <SwiperTrenDing data={topMovies} onSlideClick={(item:Movie) => {
             handelDetail(item)
           }}/>
         </Box>
@@ -86,11 +96,26 @@ const HomePage: React.FunctionComponent = () => {
               Xem thêm
             </Text>
           </Box>
-
+          <SwiperNew data={trendingMovies} onSlideClick={(item:Movie) => {
+            handelDetail(item)
+          }}/>
+        </Box>
+        <Box className="h-auto">
+          <Box flexDirection="row" justifyContent="space-between">
+            <Text className="text-white p-2" size="xLarge" bold={true}>
+              Đang chiếu
+            </Text>
+            <Text className="text-[#F8EE0D] p-2" size="xLarge" bold={true}>
+              Xem thêm
+            </Text>
+          </Box>
           <SwiperNew data={upcomingMovies} onSlideClick={(item:Movie) => {
             handelDetail(item)
           }}/>
         </Box>
+      
+
+        <Box height={60}></Box>
       </Box>
     </Page>
   );

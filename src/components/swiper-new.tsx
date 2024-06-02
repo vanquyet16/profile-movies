@@ -30,7 +30,7 @@ const SwiperNew: React.FunctionComponent<Props> = ({ data, onSlideClick }) => {
             }}
             pagination={false}
             modules={[EffectCoverflow, Pagination, Autoplay]}
-            className="swiper-new "
+            className="swiper-new"
             loop={shouldLoop}
         >
             {data.map((item: Movie, index: number) => (

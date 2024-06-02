@@ -31,6 +31,7 @@ const DetailMovie: React.FunctionComponent = () => {
   const { id } = useParams();
   const [video, setVideo] = useState<Movie[]>([]);
   const [cats, setCast] = useState<Cast[]>([]);
+  console.log("🚀 ~ cats:", cats)
   const [detail, setDetail] = useState<Movie>();
   const getDetail = async () => {
     openSnackbar({

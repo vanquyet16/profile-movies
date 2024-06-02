@@ -4,11 +4,15 @@ import { Avatar, Box, Input } from "zmp-ui";
 export interface IHeaderComponentProps {
   onclick?: () => void;
 }
-
+// bg-[#313230] 
 export default function HeaderComponent(props: IHeaderComponentProps) {
   const { onclick } = props;
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center bg-[#313230]  pb-4"   style={{ 
+      position: 'sticky', 
+      top: 0, 
+      zIndex: 1000, 
+    }}>
       <div className="pl-3">
         <img
           width={40}
